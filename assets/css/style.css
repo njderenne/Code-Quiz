@@ -59,6 +59,7 @@ header {
 
 .start {
     margin-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .start-text p {
@@ -70,13 +71,12 @@ header {
 }
 
 .start-btn {
-    width: 50%;
-    height: 100%;
+    width: 30%;
     background-color: #31112C;
     border-radius: 5px;
+    padding-bottom: 10px;
     color: #fff;
     padding: 5px;
-    margin-bottom: 7px;
     text-align: start;
     padding-left: 10px;
     margin: auto;
@@ -148,6 +148,48 @@ header {
     margin-bottom: 7px;
     text-align: start;
     padding-left: 10px;
+}
+
+.end-text {
+    background-color: #F2A07B;
+    width: 60%;
+    margin: auto auto 30px auto;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+}
+
+.end-statement, .final-score {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.final-score {
+    padding-top: 2px;
+    padding-bottom: 25px;
+}
+
+.score-form {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.input-initials {
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}
+.submit-btn {
+    width: 10%;
+    background-color: #31112C;
+    border-radius: 5px;
+    color: #fff;
+    padding: 4px;
+    text-align: start;
+    margin: auto;
+    text-align: center;
 }
 
 footer {

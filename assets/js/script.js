@@ -5,6 +5,11 @@ var textAreaEl = document.querySelector(".text-area");
 var countDownEl = document.querySelector(".timer");
 var startTextEl = document.querySelector(".start-text");
 var startBtn = document.querySelector(".start-btn");
+var highscoreEl = document.querySelector(".highscore");
+var questionCountEl = document.querySelector(".question-count");
+var timerEl = document.querySelector(".timer");
+var endTextEl = document.querySelector(".end-text");
+var submitButtonEl = document.querySelector(".submit-btn");
 var arrayIndex = 0;
 var maxTimer = 75;
 var quizTime = 0;
@@ -93,6 +98,12 @@ var questionArray = [
 
 var startGame = function() {
     textAreaEl.classList.add("hidden");
+    //highscoreEl.classList.add("hidden");
+    questionCountEl.classList.add("hidden");
+    timerEl.classList.add("hidden");
+    endTextEl.classList.add("hidden");
+
+
     //startTextEl.textContent = "This is the start of the quiz";
     //startTextEl.classList.add("hidden");
     startBtn.addEventListener("click", setUpQuiz);
@@ -116,12 +127,17 @@ var setUpQuiz = function() {
     timer = setInterval(startTimer,1000);
     startTextEl.classList.add("hidden");
     textAreaEl.classList.remove("hidden");
+    //highscoreEl.classList.remove("hidden");
+    //questionCountEl.classList.remove("hidden");
+    timerEl.classList.remove("hidden");
     console.log("this sets up the page");
+    showQuestion();
 };
  
 
 var showQuestion = function() {
     //display updated text
+    //questionCountEl.textContent = `${questionCount} / ${questionArray.length}`;
     document.querySelector(".question-text").textContent = questionArray[arrayIndex].q;
     document.querySelector(".btn-1").textContent = questionArray[arrayIndex].a1;
     document.querySelector(".btn-2").textContent = questionArray[arrayIndex].a2;
@@ -143,6 +159,7 @@ var answerSelect = function(event) {
     }
     else if (targetEl.textContent != questionArray[arrayIndex].a) {
         //if incorrect subtract 10 seconds off timer
+        maxTimer -= 15;
         console.log("Wrong Answer Go Study!");
     }
     setNextQuestion();
@@ -164,15 +181,40 @@ var setNextQuestion = function() {
 var endQuiz = function() {
     console.log("This is the end of the game the functions worked");
     console.log(`Your score is ${score}.`)
+    textAreaEl.classList.add("hidden");
+    highscoreEl.classList.add("hidden");
+    questionCountEl.classList.add("hidden");
+    timerEl.classList.add("hidden");
     clearInterval(timer);
+    endTextEl.classList.remove("hidden");
+    highscoreEl.classList.remove("hidden");
+    document.querySelector(".final-score").textContent = `You got a score of ${score}!`;
+
     //show score for the quiz
     //open form to enter name with score
     //add to highscore list if it beats current highscore
+    submitButtonEl.addEventListener("click", saveScore);
 };
 
+var saveScore = function() {
+    endScore = localStorage.setItem("endScore", JSON.stringify(score));
+    console.log("Score saved");
+    quizSummary();
+};
+
+var quizSummary = function() {
+    console.log("Summary Page Loads");
+};
+
+var loadHighScore = function() {
+    highScore = localStorage.getItem("endScore", score);
+    highScore = JSON.parse(highScore);
+    console.log(highScore);
+};
 
 
 //this actually runs the quiz
 startGame();
+console.log("end of the function");
+highscoreEl.addEventListener("click", loadHighScore);
 
-showQuestion();
