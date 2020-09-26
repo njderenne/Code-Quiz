@@ -6,6 +6,8 @@ var countDownEl = document.querySelector(".timer");
 var startTextEl = document.querySelector(".start-text");
 var startBtn = document.querySelector(".start-btn");
 var highscoreEl = document.querySelector(".highscore");
+var highScorePageEl = document.querySelector(".score");
+var highScoreDisplayEl = document.querySelector(".high-score-list");
 var questionCountEl = document.querySelector(".question-count");
 var timerEl = document.querySelector(".timer");
 var endTextEl = document.querySelector(".end-text");
@@ -97,20 +99,17 @@ var questionArray = [
 ];
 
 var startGame = function() {
+    highscoreEl.classList.remove("hidden");
+    startTextEl.classList.remove("hidden");
+    highScorePageEl.classList.add("hidden");
     textAreaEl.classList.add("hidden");
     //highscoreEl.classList.add("hidden");
     questionCountEl.classList.add("hidden");
     timerEl.classList.add("hidden");
     endTextEl.classList.add("hidden");
+    highScoreDisplayEl.classList.add("hidden");
 
-
-    //startTextEl.textContent = "This is the start of the quiz";
-    //startTextEl.classList.add("hidden");
     startBtn.addEventListener("click", setUpQuiz);
-    //setUpQuiz();
-    //set initial screen
-    //call showQuestion function on click event
-    //startButton.addEventListener("click", setUpQuiz);
 };
 
 var startTimer = function() {
@@ -134,7 +133,6 @@ var setUpQuiz = function() {
     showQuestion();
 };
  
-
 var showQuestion = function() {
     //display updated text
     //questionCountEl.textContent = `${questionCount} / ${questionArray.length}`;
@@ -190,31 +188,45 @@ var endQuiz = function() {
     highscoreEl.classList.remove("hidden");
     document.querySelector(".final-score").textContent = `You got a score of ${score}!`;
 
-    //show score for the quiz
-    //open form to enter name with score
-    //add to highscore list if it beats current highscore
     submitButtonEl.addEventListener("click", saveScore);
 };
 
 var saveScore = function() {
-    endScore = localStorage.setItem("endScore", JSON.stringify(score));
-    console.log("Score saved");
-    quizSummary();
-};
-
-var quizSummary = function() {
-    console.log("Summary Page Loads");
+    initialInput = document.getElementById("input-initials").value;
+    if (JSON.parse(localStorage.getItem("endScore", score)) >= score) {
+        console.log("not the new highscore maybe next time");
+        return;
+    } else {
+        initial = localStorage.setItem("initial", JSON.stringify(initialInput));
+        endScore = localStorage.setItem("endScore", JSON.stringify(score));
+        console.log("Score saved");
+    }
+    console.log(initialInput);
 };
 
 var loadHighScore = function() {
     highScore = localStorage.getItem("endScore", score);
     highScore = JSON.parse(highScore);
     console.log(highScore);
+    
+    highScoreInitial = localStorage.getItem("initial", score);
+    highScoreInitial = JSON.parse(highScoreInitial);
+
+    highScoreDisplayEl.textContent = `${highScoreInitial} : ${highScore}`;
+
+    highScorePage();
 };
+
+var highScorePage = function() {
+    highscoreEl.classList.add("hidden");
+    startTextEl.classList.add("hidden");
+    highScorePageEl.classList.remove("hidden");
+    highScoreDisplayEl.classList.remove("hidden");
+    document.querySelector(".go-back-btn").addEventListener("click", startGame);
+}
 
 
 //this actually runs the quiz
 startGame();
-console.log("end of the function");
 highscoreEl.addEventListener("click", loadHighScore);
 
