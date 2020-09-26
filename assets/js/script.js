@@ -2,7 +2,8 @@
 var score = 0;
 var questionCount = 1;
 var textAreaEl = document.querySelector(".text-area");
-var arrayIndex = 0
+var arrayIndex = 0;
+var maxTimer = 75;
 var questionArray = [
     {
         q: "What is the difference between 'var' and 'const'?",
@@ -91,6 +92,10 @@ var startGame = function() {
     //call showQuestion function on click event
     startButton.addEventListener("click", showQuestion);
 };
+
+var startTimer = function(maxTimer) {
+
+}
 
 var showQuestion = function() {
 
