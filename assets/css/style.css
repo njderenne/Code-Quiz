@@ -4,6 +4,10 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+.hidden {
+    display: none !important;
+}
+
 body {
     background-color: #fdbcc4;
 }
@@ -53,6 +57,33 @@ header {
     margin: 0 auto;
 }
 
+.start {
+    margin-bottom: 20px;
+}
+
+.start-text p {
+    display: block;
+    text-align: center;
+    padding: 20px 5px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.start-btn {
+    width: 50%;
+    height: 100%;
+    background-color: #31112C;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px;
+    margin-bottom: 7px;
+    text-align: start;
+    padding-left: 10px;
+    margin: auto;
+    text-align: center;
+    display: block;
+}
+
 .timer {
     display: grid;
     grid-row: 2;
@@ -95,6 +126,7 @@ header {
     text-align: center;
     font-weight: 700;
     font-size: 20px;
+    display: none;
 }
 
 .question-text {

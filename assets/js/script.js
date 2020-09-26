@@ -2,8 +2,12 @@
 var score = 0;
 var questionCount = 1;
 var textAreaEl = document.querySelector(".text-area");
+var countDownEl = document.querySelector(".timer");
+var startTextEl = document.querySelector(".start-text");
+var startBtn = document.querySelector(".start-btn");
 var arrayIndex = 0;
 var maxTimer = 75;
+var quizTime = 0;
 var questionArray = [
     {
         q: "What is the difference between 'var' and 'const'?",
@@ -88,18 +92,35 @@ var questionArray = [
 ];
 
 var startGame = function() {
+    textAreaEl.classList.add("hidden");
+    //startTextEl.textContent = "This is the start of the quiz";
+    //startTextEl.classList.add("hidden");
+    startBtn.addEventListener("click", setUpQuiz);
+    //setUpQuiz();
     //set initial screen
     //call showQuestion function on click event
-    startButton.addEventListener("click", showQuestion);
+    //startButton.addEventListener("click", setUpQuiz);
 };
 
-var startTimer = function(maxTimer) {
+var startTimer = function() {
+    currentTime = maxTimer - quizTime;
+    quizTime++;
+    if (currentTime >= 0){
+        countDownEl.textContent = currentTime;
+    } if (currentTime < 0) {
+        endQuiz();
+    }
+};
 
-}
+var setUpQuiz = function() {
+    timer = setInterval(startTimer,1000);
+    startTextEl.classList.add("hidden");
+    textAreaEl.classList.remove("hidden");
+    console.log("this sets up the page");
+};
+ 
 
 var showQuestion = function() {
-
-    console.log(arrayIndex);
     //display updated text
     document.querySelector(".question-text").textContent = questionArray[arrayIndex].q;
     document.querySelector(".btn-1").textContent = questionArray[arrayIndex].a1;
@@ -124,22 +145,8 @@ var answerSelect = function(event) {
         //if incorrect subtract 10 seconds off timer
         console.log("Wrong Answer Go Study!");
     }
-    //call resetState to clear question and answer
-    //resetState();
     setNextQuestion();
 };
-
-/*
-
-var resetState = function() {
-    //clear question and answer options
-    ////////////////////learn how to clear textContent///////////////////
-    console.log("Still need the resetState function");
-    //call setNextQuestion
-    setNextQuestion();
-};
-
-*/
 
 var setNextQuestion = function() {
     //if indexarray = indexarray-1
@@ -157,9 +164,15 @@ var setNextQuestion = function() {
 var endQuiz = function() {
     console.log("This is the end of the game the functions worked");
     console.log(`Your score is ${score}.`)
+    clearInterval(timer);
     //show score for the quiz
     //open form to enter name with score
     //add to highscore list if it beats current highscore
 };
+
+
+
+//this actually runs the quiz
+startGame();
 
 showQuestion();
