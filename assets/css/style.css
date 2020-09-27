@@ -84,6 +84,11 @@ header {
     display: block;
 }
 
+.btn:hover {
+    background-color: lightblue;
+    color: #000000;
+}
+
 .timer {
     display: grid;
     grid-row: 2;
