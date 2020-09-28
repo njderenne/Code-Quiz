@@ -2,6 +2,7 @@
 var score = 0;
 var questionCount = 1;
 var textAreaEl = document.querySelector(".text-area");
+var answerAreaEl = document.querySelector(".answer-list");
 var countDownEl = document.querySelector(".timer");
 var startTextEl = document.querySelector(".start-text");
 var startBtn = document.querySelector(".start-btn");
@@ -12,6 +13,8 @@ var questionCountEl = document.querySelector(".question-count");
 var timerEl = document.querySelector(".timer");
 var endTextEl = document.querySelector(".end-text");
 var submitButtonEl = document.querySelector(".submit-btn");
+var feedbackEl = document.querySelector(".feedback");
+var footerEl = document.querySelector(".absolute");
 var arrayIndex = 0;
 var maxTimer = 75;
 var quizTime = 0;
@@ -103,11 +106,11 @@ var startGame = function() {
     startTextEl.classList.remove("hidden");
     highScorePageEl.classList.add("hidden");
     textAreaEl.classList.add("hidden");
-    //highscoreEl.classList.add("hidden");
     questionCountEl.classList.add("hidden");
     timerEl.classList.add("hidden");
     endTextEl.classList.add("hidden");
     highScoreDisplayEl.classList.add("hidden");
+    feedbackEl.classList.add("hidden");
 
     startBtn.addEventListener("click", setUpQuiz);
 };
@@ -117,6 +120,7 @@ var startTimer = function() {
     quizTime++;
     if (currentTime >= 0){
         countDownEl.textContent = currentTime;
+        lowTime();
     } if (currentTime < 0) {
         endQuiz();
     }
@@ -126,16 +130,17 @@ var setUpQuiz = function() {
     timer = setInterval(startTimer,1000);
     startTextEl.classList.add("hidden");
     textAreaEl.classList.remove("hidden");
-    //highscoreEl.classList.remove("hidden");
-    //questionCountEl.classList.remove("hidden");
+    highscoreEl.classList.add("hidden");
     timerEl.classList.remove("hidden");
-    console.log("this sets up the page");
+
     showQuestion();
 };
  
 var showQuestion = function() {
+    questionCountEl.classList.remove("hidden");
+    questionCountEl.textContent= `${questionCount}/${questionArray.length}`;
+    questionCount++;
     //display updated text
-    //questionCountEl.textContent = `${questionCount} / ${questionArray.length}`;
     document.querySelector(".question-text").textContent = questionArray[arrayIndex].q;
     document.querySelector(".btn-1").textContent = questionArray[arrayIndex].a1;
     document.querySelector(".btn-2").textContent = questionArray[arrayIndex].a2;
@@ -143,22 +148,29 @@ var showQuestion = function() {
     document.querySelector(".btn-4").textContent = questionArray[arrayIndex].a4;
 
     //add event listener on click event to call answerSelect
-    textAreaEl.addEventListener("click", answerSelect);
+    answerAreaEl.addEventListener("click", answerSelect);
 };
 
 var answerSelect = function(event) {
+    footerEl.classList.remove("absolute");
     var targetEl = event.target;
 
     //compare answer choice vs actual answer
     if (targetEl.textContent === questionArray[arrayIndex].a) {
         //if correct add 10 points to score
+        feedbackEl.classList.add("feedback-c");
+        feedbackEl.classList.remove("feedback-w");
+        feedbackEl.textContent = "Correct!";
+        feedbackEl.classList.remove("hidden");
         score += 10;
-        console.log("Correct Answer!");
     }
     else if (targetEl.textContent != questionArray[arrayIndex].a) {
         //if incorrect subtract 10 seconds off timer
+        feedbackEl.classList.add("feedback-w");
+        feedbackEl.classList.remove("feedback-c");
+        feedbackEl.textContent = "Incorrect!";
+        feedbackEl.classList.remove("hidden")
         maxTimer -= 15;
-        console.log("Wrong Answer Go Study!");
     }
     setNextQuestion();
 };
@@ -170,15 +182,19 @@ var setNextQuestion = function() {
         endQuiz();
     } else {
         //add one to the indexarray
-        arrayIndex += 1;
+        arrayIndex ++;
         //call showQuestion
         showQuestion();
     }
 };
 
 var endQuiz = function() {
-    console.log("This is the end of the game the functions worked");
-    console.log(`Your score is ${score}.`)
+    score = score +currentTime;
+    if (score <= 0){
+        score = 0;
+    };
+    questionCountEl.classList.add("hidden");
+    footerEl.classList.add("absolute");
     textAreaEl.classList.add("hidden");
     highscoreEl.classList.add("hidden");
     questionCountEl.classList.add("hidden");
@@ -187,27 +203,23 @@ var endQuiz = function() {
     endTextEl.classList.remove("hidden");
     highscoreEl.classList.remove("hidden");
     document.querySelector(".final-score").textContent = `You got a score of ${score}!`;
-
+    feedbackEl.classList.add("hidden");
     submitButtonEl.addEventListener("click", saveScore);
 };
 
 var saveScore = function() {
     initialInput = document.getElementById("input-initials").value;
     if (JSON.parse(localStorage.getItem("endScore", score)) >= score) {
-        console.log("not the new highscore maybe next time");
         return;
     } else {
         initial = localStorage.setItem("initial", JSON.stringify(initialInput));
         endScore = localStorage.setItem("endScore", JSON.stringify(score));
-        console.log("Score saved");
     }
-    console.log(initialInput);
 };
 
 var loadHighScore = function() {
     highScore = localStorage.getItem("endScore", score);
     highScore = JSON.parse(highScore);
-    console.log(highScore);
     
     highScoreInitial = localStorage.getItem("initial", score);
     highScoreInitial = JSON.parse(highScoreInitial);
@@ -225,8 +237,13 @@ var highScorePage = function() {
     document.querySelector(".go-back-btn").addEventListener("click", startGame);
 }
 
+var lowTime = function(){
+    if ((maxTimer - quizTime) <= 9){
+        countDownEl.classList.add("urgent");
+    };
+};
+
 
 //this actually runs the quiz
 startGame();
 highscoreEl.addEventListener("click", loadHighScore);
-

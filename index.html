@@ -15,7 +15,7 @@
             <button class="btn highscore-btn">View Highscore</button>
         </div>
         <div class="question-count">
-
+            <p class="question-counts"></p>
         </div>
         <div class="timer">
 
@@ -25,6 +25,7 @@
     <section class="start">
         <div class="start-text">
             <p>This is a code quiz press the 'Start Quiz' button to begin! <br> Good Luck!</p>
+            <p id="info">You will get 10 points for every correct answer and lose 15 seconds for every incorrect answer. Your total score will be the score from correct answers plus one point for every second left over.</p>
             <button class="btn start-btn">Start Quiz</button>
         </div>
     </section>
@@ -45,7 +46,7 @@
         <div class="score">
             <h3 class="high-score-title">High Score!</h3>
             <p class="high-score-list"></p>
-            <button class="go-back-btn">Go Back</button>
+            <button class="go-back-btn btn">Go Back</button>
 
         </div>
     </section>
@@ -74,12 +75,12 @@
                 </ul>
             </div>
         </div>
-        <div class="feedback hide">
-            Correct!
+        <div class=" feedback feedback-c feedback-w">
+            <h3>Feedback</h3>
         </div>
     </section>
 
-    <footer>&copy;2020 Code Quiz</footer>
+    <footer class="absolute">&copy;2020 Code Quiz</footer>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

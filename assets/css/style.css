@@ -45,7 +45,7 @@ header {
     padding: 10px;
 }
 
-.questionCount {
+.question-count {
     display: grid;
     grid-row: 2;
     grid-column: 2;
@@ -55,6 +55,12 @@ header {
     border-radius: 5px;
     width: 50%;
     margin: 0 auto;
+}
+
+.urgent {
+    color: red;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .start {
@@ -68,6 +74,13 @@ header {
     padding: 20px 5px;
     font-size: 24px;
     font-weight: 700;
+}
+
+#info {
+    font-size: 14px;
+    font-weight: 500;
+    width: 80%;
+    margin: auto;
 }
 
 .start-btn {
@@ -118,7 +131,7 @@ header {
     margin-bottom: 5px;
 }
 
-.feedback {
+.feedback-c {
     display: grid;
     grid-row: 3;
     grid-column: 2;
@@ -131,7 +144,21 @@ header {
     text-align: center;
     font-weight: 700;
     font-size: 20px;
-    display: none;
+}
+
+.feedback-w {
+    display: grid;
+    grid-row: 3;
+    grid-column: 2;
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    background-color:  rgba(197, 11, 11, 0.85);
+    border: rgba(0, 0, 0, 0.5) solid 2px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
 }
 
 .question-text {
@@ -169,6 +196,7 @@ header {
     font-size: 20px;
     font-weight: 600;
     text-align: center;
+    margin: auto 10px auto 10px;
 }
 
 .final-score {
@@ -237,4 +265,11 @@ footer {
     color: #fff;
     text-align: center;
     padding: 13px 0 13px 0;
+    width: 100%;
+    bottom: 0;
+    margin-top: 2%;
+}
+
+.absolute {
+    position: absolute;
 }
