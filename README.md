@@ -11,33 +11,45 @@ When the application is ran the user will be informed about the scoring and pena
 ## Images
 
 ### Code Quiz Homepage
+
 </br>
 </br>
+
 ![Code Quiz start page](https://github.com/njderenne/code-quiz/blob/master/assets/images/Capture1.PNG?raw=true)
 
 ### Layout of the Quiz
+
 </br>
 </br>
+
 ![Layout of the quiz](https://github.com/njderenne/code-quiz/blob/master/assets/images/Capture2.PNG?raw=true)
 
 ### Instant Answer Feedback
+
 </br>
 </br>
+
 ![Instant Answer Feedback](https://github.com/njderenne/code-quiz/blob/master/assets/images/Capture3.PNG?raw=true)
 
 ### Low Time Warning
+
 </br>
 </br>
+
 ![Low time warning](https://github.com/njderenne/code-quiz/blob/master/assets/images/Capture4.PNG?raw=true)
 
 ### Ability to Save Score
+
 </br>
 </br>
+
 ![Ability to save score](https://github.com/njderenne/code-quiz/blob/master/assets/images/Capture5.PNG?raw=true)
 
 ### High Score!
+
 </br>
 </br>
+
 ![High score!](https://github.com/njderenne/code-quiz/blob/master/assets/images/Capture6.PNG?raw=true)
 
 
